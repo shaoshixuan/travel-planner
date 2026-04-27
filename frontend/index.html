@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅行规划智能体</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="logo">✈️</span>
+            <span class="brand-name">旅行规划智能体</span>
+        </div>
+        <div class="nav-steps">
+            <div class="step active" data-step="1">
+                <span class="step-number">1</span>
+                <span class="step-label">人格测试</span>
+                <span class="optional-tag">可选</span>
+            </div>
+            <div class="step" data-step="2">
+                <span class="step-number">2</span>
+                <span class="step-label">生成攻略</span>
+            </div>
+            <div class="step" data-step="3">
+                <span class="step-number">3</span>
+                <span class="step-label">路线规划</span>
+            </div>
+            <div class="step" data-step="4">
+                <span class="step-number">4</span>
+                <span class="step-label">导出文档</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- 步骤1: 人格测试 -->
+        <section id="step1" class="page active">
+            <div class="container">
+                <div class="page-header">
+                    <h1>🎯 发现你的旅行人格</h1>
+                    <p>回答12道问题，找到最适合你的旅行方式</p>
+                </div>
+                <div class="test-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                        <span class="progress-text">0/12</span>
+                    </div>
+                    <div id="questionContainer" class="question-container">
+                        <!-- 题目将动态加载 -->
+                    </div>
+                    <div class="test-navigation">
+                        <button id="prevBtn" class="btn btn-secondary" disabled>上一题</button>
+                        <button id="nextBtn" class="btn btn-primary" disabled>下一题</button>
+                    </div>
+                    <div class="skip-section">
+                        <p style="color: #6b7280; margin-bottom: 0.5rem;">或</p>
+                        <button id="skipTestBtn" class="btn btn-outline">
+                            <span>⚡</span> 跳过测试，直接生成攻略
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 步骤2: 攻略输入 -->
+        <section id="step2" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>📝 规划你的旅程</h1>
+                    <p>填写基本信息，生成专属攻略</p>
+                </div>
+                <div class="result-card" id="personalityCard">
+                    <div class="personality-result" id="personalityResult" style="display: none;">
+                        <span class="personality-emoji" id="personalityEmoji">🎯</span>
+                        <div class="personality-info">
+                            <h3 id="personalityType">探险家</h3>
+                            <p id="personalityDesc">你喜欢深入探索未知的地方</p>
+                        </div>
+                    </div>
+                    <div class="no-personality" id="noPersonality">
+                        <span class="no-personality-icon">✈️</span>
+                        <div class="no-personality-info">
+                            <h3>未进行人格测试</h3>
+                            <p>AI将为你生成通用风格的攻略，<a href="#" id="takeTestLink">点击这里进行测试</a> 可获得个性化推荐</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="destination">目的地城市</label>
+                        <input type="text" id="destination" placeholder="如：杭州、成都、厦门..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="days">出行天数</label>
+                        <div class="slider-container">
+                            <input type="range" id="days" min="1" max="10" value="3">
+                            <span class="slider-value" id="daysValue">3天</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">人均预算（元）</label>
+                        <div class="slider-container">
+                            <input type="range" id="budget" min="500" max="20000" value="3000" step="500">
+                            <span class="slider-value" id="budgetValue">3000元</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">备注与偏好 <span class="optional-tag">(可选)</span></label>
+                        <textarea id="notes" placeholder="例如：喜欢吃辣、避免拥挤景点、带老人出行、想去网红打卡点..." rows="3"></textarea>
+                        <p class="form-hint">告诉AI你的特殊需求，让攻略更贴合你的喜好</p>
+                    </div>
+                    <button id="generateBtn" class="btn btn-primary btn-large btn-block">
+                        <span class="btn-icon">🚀</span>
+                        生成攻略
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 步骤3: 攻略展示 -->
+        <section id="step3" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>🗺️ 你的专属攻略</h1>
+                    <p>基于你的旅行人格定制</p>
+                </div>
+                <div class="plan-container">
+                    <div class="plan-toolbar">
+                        <button id="reviseBtn" class="btn btn-secondary">
+                            <span>✏️</span> 修改攻略
+                        </button>
+                        <button id="viewRouteBtn" class="btn btn-primary">
+                            <span>📍</span> 查看路线
+                        </button>
+                    </div>
+                    <div id="planContent" class="plan-content">
+                        <!-- 攻略内容将动态加载 -->
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                            <p>AI正在生成攻略...</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="reviseModal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>修改攻略</h3>
+                            <button class="modal-close">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <textarea id="revisionInput" placeholder="请输入你的修改要求，如：增加美食推荐、减少每天的景点数量..."></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary modal-cancel">取消</button>
+                            <button id="submitRevision" class="btn btn-primary">确认修改</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 步骤4: 路线规划 -->
+        <section id="step4" class="page">
+            <div class="container full-height">
+                <div class="page-header">
+                    <h1>🚶 路线可视化</h1>
+                    <p>查看每日行程路线和交通方案</p>
+                </div>
+                <div class="route-container">
+                    <div class="day-selector" id="daySelector">
+                        <!-- 日按钮将动态生成 -->
+                    </div>
+                    <div class="route-content">
+                        <div id="mapContainer" class="map-container">
+                            <!-- 高德地图将在此渲染 -->
+                            <div class="map-placeholder" id="mapPlaceholder">
+                                <p style="font-size: 3rem;">🗺️</p>
+                                <p>加载地图需要高德地图 <b>Web端(JS API) Key</b></p>
+                                <div class="api-key-input">
+                                    <input type="text" id="amapKeyInput" placeholder="请输入JS API Key（非Web服务Key）">
+                                    <button id="loadMapBtn" class="btn btn-primary btn-sm">加载地图</button>
+                                </div>
+                                <p class="map-hint">
+                                    <a href="https://console.amap.com/dev/key/app" target="_blank" style="color: #4f46e5;">申请JS API Key →</a>
+                                    <span style="color: #6b7280; margin-left: 10px;">（需要创建"Web端"类型应用）</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="route-panel">
+                            <h3>今日路线</h3>
+                            <div id="routeList" class="route-list">
+                                <!-- 路线列表将动态加载 -->
+                            </div>
+                            <div class="route-summary">
+                                <div class="summary-item">
+                                    <span class="summary-label">总距离</span>
+                                    <span id="totalDistance" class="summary-value">--</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">预计时间</span>
+                                    <span id="totalTime" class="summary-value">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-actions">
+                    <button id="prevStepBtn" class="btn btn-secondary">返回攻略</button>
+                    <button id="exportBtn" class="btn btn-primary">
+                        <span>📄</span> 导出文档
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 步骤5: 文档导出 -->
+        <section id="step5" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>📄 导出攻略文档</h1>
+                    <p>编辑并导出你的旅行攻略</p>
+                </div>
+                <div class="document-container">
+                    <div class="document-editor">
+                        <h3>编辑区 <span class="hint">(可直接编辑)</span></h3>
+                        <textarea id="markdownEditor" class="markdown-editor"></textarea>
+                    </div>
+                    <div class="document-preview">
+                        <h3>预览区</h3>
+                        <div id="documentPreview" class="preview-content"></div>
+                    </div>
+                </div>
+                <div class="export-actions">
+                    <button id="exportPdfBtn" class="btn btn-primary btn-large">
+                        <span>📥</span> 导出PDF
+                    </button>
+                    <button id="copyMarkdownBtn" class="btn btn-secondary">
+                        <span>📋</span> 复制Markdown
+                    </button>
+                    <button id="restartBtn" class="btn btn-outline">
+                        <span>🔄</span> 重新开始
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

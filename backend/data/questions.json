@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "dimension": "exploration",
+    "question": "在旅行中，你更倾向于？",
+    "options": [
+      {"text": "探索人迹罕至的小众景点，即使配套设施不完善", "score": 2},
+      {"text": "选择开发成熟的知名景点，安全舒适有保障", "score": -2}
+    ]
+  },
+  {
+    "id": 2,
+    "dimension": "exploration",
+    "question": "面对旅行中的不确定性，你的态度是？",
+    "options": [
+      {"text": "期待惊喜，未知才有趣", "score": 2},
+      {"text": "尽量规避，稳妥最重要", "score": -2}
+    ]
+  },
+  {
+    "id": 3,
+    "dimension": "exploration",
+    "question": "你更喜欢的旅行方式是？",
+    "options": [
+      {"text": "背包穷游，体验当地真实生活", "score": 2},
+      {"text": "舒适出行，住好一点的酒店", "score": -2}
+    ]
+  },
+  {
+    "id": 4,
+    "dimension": "depth",
+    "question": "对于同一个城市，你的游览策略是？",
+    "options": [
+      {"text": "花整天时间深度游览2-3个景点", "score": 2},
+      {"text": "快速打卡5-8个热门景点", "score": -2}
+    ]
+  },
+  {
+    "id": 5,
+    "dimension": "depth",
+    "question": "参观博物馆时，你通常会？",
+    "options": [
+      {"text": "仔细研究感兴趣的展品，可能只看完一半", "score": 2},
+      {"text": "快速浏览所有展区，不放过任何精彩", "score": -2}
+    ]
+  },
+  {
+    "id": 6,
+    "dimension": "depth",
+    "question": "你更喜欢哪种旅行节奏？",
+    "options": [
+      {"text": "慢节奏，在一个地方待很久", "score": 2},
+      {"text": "快节奏，尽可能多看几个地方", "score": -2}
+    ]
+  },
+  {
+    "id": 7,
+    "dimension": "social",
+    "question": "旅行中，你更喜欢？",
+    "options": [
+      {"text": "结交新朋友，参加当地活动", "score": 2},
+      {"text": "独来独往，享受个人空间", "score": -2}
+    ]
+  },
+  {
+    "id": 8,
+    "dimension": "social",
+    "question": "用餐时，你倾向于？",
+    "options": [
+      {"text": "热闹的餐厅，可能拼桌聊天", "score": 2},
+      {"text": "安静的小馆，独自品味美食", "score": -2}
+    ]
+  },
+  {
+    "id": 9,
+    "dimension": "social",
+    "question": "分享旅行经历时，你更愿意？",
+    "options": [
+      {"text": "实时发朋友圈，与朋友互动", "score": 2},
+      {"text": "静静收藏，只偶尔提起", "score": -2}
+    ]
+  },
+  {
+    "id": 10,
+    "dimension": "planning",
+    "question": "出行前，你会？",
+    "options": [
+      {"text": "详细规划每天行程，精确到小时", "score": 2},
+      {"text": "大致定个方向，走到哪算哪", "score": -2}
+    ]
+  },
+  {
+    "id": 11,
+    "dimension": "planning",
+    "question": "旅行中遇到计划外的变化，你会？",
+    "options": [
+      {"text": "调整计划，确保总体目标达成", "score": 2},
+      {"text": "随遇而安，变化也是一种体验", "score": -2}
+    ]
+  },
+  {
+    "id": 12,
+    "dimension": "planning",
+    "question": "关于旅行预订，你更倾向于？",
+    "options": [
+      {"text": "提前订好所有住宿和门票", "score": 2},
+      {"text": "当天再决定，保持灵活性", "score": -2}
+    ]
+  }
+]
