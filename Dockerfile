@@ -1,19 +1,17 @@
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
 # Install dependencies
 COPY backend/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-# Copy backend code
-COPY backend/ ./backend/
+# Copy backend code to /app
+COPY backend/ .
 
-# Copy frontend files
-COPY frontend/ ./frontend/
+# Copy frontend to /frontend (app.py expects ../frontend)
+COPY frontend/ /frontend/
 
-# Start from backend directory
-WORKDIR /app/backend
-
-# Start with gunicorn, using PORT env var (default 8888)
-CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-8888} --workers 1 --timeout 120 app:app"]
+# Start with gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:${PORT:-8888}", "--workers", "1", "--timeout", "120", "app:app"]
