@@ -252,4 +252,5 @@ def map_snapshot():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8888, host='0.0.0.0')
+    port = int(os.environ.get('PORT', 8888))
+    app.run(debug=False, port=port, host='0.0.0.0')

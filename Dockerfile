@@ -9,8 +9,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application
 COPY backend/ .
 
-# Expose port
-EXPOSE 8888
-
-# Start with gunicorn (production server)
-CMD ["gunicorn", "--bind", "0.0.0.0:8888", "--workers", "1", "--timeout", "120", "app:app"]
+# Start with gunicorn, using PORT env var (default 8888)
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-8888} --workers 1 --timeout 120 app:app"]
