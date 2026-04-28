@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: travel-planner
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && python3 app.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.18
+      - key: ZHIPU_API_KEY
+        sync: false
+      - key: AMAP_API_KEY
+        sync: false
