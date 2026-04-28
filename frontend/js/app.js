@@ -1,5 +1,5 @@
-// API基础URL
-const API_BASE = 'http://localhost:8888/api';
+// API基础URL - 动态获取当前域名
+const API_BASE = window.location.origin + '/api';
 
 // 全局状态
 const state = {
