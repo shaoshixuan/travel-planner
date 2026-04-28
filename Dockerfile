@@ -12,5 +12,5 @@ COPY backend/ .
 # Expose port
 EXPOSE 8888
 
-# Start command
-CMD ["python", "app.py"]
+# Start with gunicorn (production server)
+CMD ["gunicorn", "--bind", "0.0.0.0:8888", "--workers", "1", "--timeout", "120", "app:app"]
